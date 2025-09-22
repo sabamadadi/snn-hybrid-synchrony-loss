@@ -25,8 +25,15 @@ Our methodology centers on the design and integration of the hybrid loss functio
 * **MNIST & Fashion-MNIST**: Both datasets consist of 28x28 grayscale images. Each image is flattened into a 784-element vector.
 * **Poisson Encoding**: To convert the static image pixels into a temporal format suitable for SNNs, we use Poisson encoding. Each pixel intensity `p` is used as the frequency parameter of a Poisson process to generate a spike train of length `T` (the number of simulation timesteps). Higher intensity pixels result in a higher probability of spiking at any given timestep.
 
-*A visualization of am image's corresponding Poisson-encoded spike train would be beneficial here.*
-![Alt text for the image](./Images//image1.png)
+
+
+<div align="center">
+
+#### 🔹 *A visualization of am image's corresponding Poisson-encoded spike train would be beneficial here.*
+<img src="Images/image1.png" alt="" width="65%"/>
+
+</div>
+
 
 ### 2.2 Spiking Neuron Models
 
@@ -35,8 +42,13 @@ The core computational units of our network are spiking neurons, implemented usi
 1.  **Leaky Integrate-and-Fire (LIF) Neuron**: A standard, computationally efficient neuron model whose membrane potential leaks over time.
 2.  **Parametric Leaky Integrate-and-Fire (PLIF) Neuron**: As defined in `model_PLIF_neuron_definition.ipynb`, this is a key component of our experiments. The PLIF neuron extends the LIF model by making the membrane potential decay factor, `v_decay`, a trainable parameter. By allowing the network to learn this parameter via backpropagation, each neuron can adapt its own temporal integration properties.
 
-*A plot showing the distribution of learned `v_decay` values for the hidden layer can illustrate neuron specialization.*
-![Alt text for the image](./Images//image2.png)
+<div align="center">
+
+#### 🔹*A plot showing the distribution of learned `v_decay` values for the hidden layer can illustrate neuron specialization.*
+<img src="Images/image2.png" alt="" width="65%"/>
+
+</div>
+
 
 ### 2.3 Network Architecture
 
@@ -61,8 +73,14 @@ The project's notebooks serve as a complete record of experimentation and analys
 
 The most direct way to observe the effect of our loss function is by visualizing the spike trains of the hidden layer neurons. When trained without the synchrony loss (`λ=0`), firing patterns are largely unstructured. When the synchrony loss is enabled (`λ>0`), neurons responding to the same class exhibit clear, coordinated firing patterns.
 
-![Alt text for the image](./Images//image3.png)
-*Caption: Comparative raster plots of hidden layer activity for the digit '3'. (Left) Trained with standard loss (`λ=0`), showing unstructured firing. (Right) Trained with hybrid loss (`λ=0.5`), showing structured, synchronous firing patterns.*
+<div align="center">
+
+#### 🔹*Caption: Comparative raster plots of hidden layer activity for the digit '3'. (Left) Trained with standard loss (`λ=0`), showing unstructured firing. (Right) Trained with hybrid loss (`λ=0.5`), showing structured, synchronous firing patterns.*
+
+<img src="Images/image3.png" alt="" width="65%"/>
+
+</div>
+
 
 ### 3.2 Training Dynamics
 
@@ -77,8 +95,15 @@ The hybrid loss function significantly alters the training dynamics. The plots b
 
 The synchrony loss can be viewed as a regularizer. We analyzed the trade-off between final test accuracy and the average number of spikes per neuron, which is a proxy for energy consumption.
 
-![Alt text for the image](./Images//image6.png)
-*Caption: Final test accuracy plotted against the average spike count per neuron for models trained with different `λ` values. This highlights the trade-off between performance and computational sparsity.*
+
+<div align="center">
+
+#### 🔹*Caption: Final test accuracy plotted against the average spike count per neuron for models trained with different `λ` values. This highlights the trade-off between performance and computational sparsity.*
+
+
+<img src="Images/image6.png" alt="" width="65%"/>
+
+</div>
 
 
 ---
@@ -98,7 +123,7 @@ This research successfully demonstrates that by incorporating a temporally-aware
 
 1.  **Clone the repository:**
     ```bash
-    git clone [your-repository-url]
+    git clone https://github.com/sabamadadi/snn-hybrid-synchrony-loss.git
     ```
 2.  **Set up the environment:**
     Install the required Python packages.
@@ -108,4 +133,5 @@ This research successfully demonstrates that by incorporating a temporally-aware
 3.  **Run an experiment:**
     Open `main_MNIST_fc_snn_hybrid_loss.ipynb` or `main_FMNIST_fc_snn_hybrid_loss.ipynb` in a Jupyter environment and execute the cells. You can modify hyperparameters like `T` (timesteps), `λ` (lambda), batch size, and learning rate within the notebook.
 4.  **Analyze the results:**
+
     After training, use `analysis_spike_train_visualization.ipynb` and `analysis_final_results_and_plots.ipynb` to visualize the spiking activity and plot the performance metrics.
